@@ -1,33 +1,39 @@
 #include<iostream>
 #include<cmath>
 
-float funct(float x);
+double funct(double x);
 double derivative(double x, double h);
-double integral(double lower_bound, double upper_bound, double n);
+double integral(double lower_bound, double upper_bound);
 double max_pt(int lower_bound, int upper_bound, double step);
 double min_pt(int lower_bound, int upper_bound, double step);
 
 int main() {
     std::cout.precision(4);
-    std::cout<<max_pt(1,5,0.1);
+    std::cout<<derivative(2,0.001)<<std::endl;
+    std::cout<<integral(-2,2)<<std::endl;
+    std::cout<<max_pt(1,5,0.1)<<std::endl;
+    std::cout<<min_pt(1,5,0.1)<<std::endl;
 }
-float funct(float x)
+inline double funct(double x)
 {
     return exp(x)*sin(x)*cos(x);
 }
 double derivative(double x, double h)
 {
-    float f1;
+    double f1;
     f1=(funct(x+h)-funct(x))/h;
     return f1;
 }
-double integral(double lower_bound, double upper_bound, double n) {
-    double step = (upper_bound-lower_bound)/n;
+double integral(double lower_bound, double upper_bound) {
+    double step = (upper_bound-lower_bound)/100;
     double upper_area {0};
     double lower_area {0};
-    for (size_t i = lower_bound; i < upper_bound; i=i+step){
-        upper_area = upper_area + (funct(i+step)*step);
-        lower_area = lower_area + (funct(i)*step);
+    double current, next;
+    for (size_t i = 0; i < 100; ++i){
+        current = lower_bound + (step*i);
+        next = lower_bound+(step*(i+1));
+        upper_area += (funct(next)*step);
+        lower_area += (funct(current)*step);
     }
     double area = (upper_area+lower_area)/2.0;
     return area;
