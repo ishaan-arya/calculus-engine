@@ -1,4 +1,4 @@
-# calculus-engine
+# Calculus Engine
 This is an open source engine written in C++ that can be used to perform calculus operations on functions 📈
 
 Currently, this engine includes the following functionality:
